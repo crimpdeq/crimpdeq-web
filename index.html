@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1118">
+  <meta name="description"
+    content="Crimpdeq is an open-source portable digital force sensor for climbers to measure finger strength, pulling power, and endurance.">
+  <link rel="icon" type="image/png" href="assets/Logo_no-bg.png">
+  <title>Crimpdeq</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+    :root {
+      --bg: #0b1118;
+      --bg-soft: #101a26;
+      --panel: #162333;
+      --text: #ecf2f8;
+      --muted: #9eb1c5;
+      --accent: #4fc3f7;
+      --accent-strong: #7cd6ff;
+      --border: #2b3f53;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      background:
+        radial-gradient(1200px 450px at 20% -10%, rgba(79, 195, 247, 0.18), transparent 55%),
+        radial-gradient(700px 380px at 85% 15%, rgba(124, 214, 255, 0.14), transparent 60%),
+        linear-gradient(180deg, #0b1118 0%, #070c12 100%);
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+    }
+
+    .card {
+      width: min(920px, 100%);
+      background: linear-gradient(180deg, rgba(22, 35, 51, 0.95), rgba(12, 19, 29, 0.94));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+      backdrop-filter: blur(6px);
+      animation: fade-up 520ms ease-out both;
+    }
+
+    .brand-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .logo {
+      width: 132px;
+      max-width: 42vw;
+      height: auto;
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+
+    .title {
+      font-family: "Inter", sans-serif;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 20px 0 12px;
+      color: var(--text);
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    .summary {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .summary li {
+      margin: 6px 0;
+    }
+
+    .book-section {
+      margin-top: 20px;
+    }
+
+    .book-heading {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .book-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .book-text+.book-text {
+      margin-top: 8px;
+    }
+
+    .app-actions {
+      margin-top: 14px;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible,
+    .card a:focus-visible {
+      outline: 2px solid var(--accent-strong);
+      outline-offset: 3px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #00111c;
+      box-shadow: 0 10px 25px rgba(79, 195, 247, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(16, 26, 38, 0.9);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(22, 35, 51, 1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .links {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .sources-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
+
+    .sources-label {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .source-sep {
+      color: var(--border);
+    }
+
+    .github-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      color: var(--text);
+      flex: 0 0 auto;
+    }
+
+    .card a:not(.btn) {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    .card a:not(.btn):hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 24px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card {
+        animation: none;
+      }
+
+      .btn {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="brand-row">
+      <h1 class="title">Crimpdeq</h1>
+      <img class="logo" src="assets/Logo_no-bg.png" alt="Crimpdeq logo">
+    </div>
+
+    <p class="lead">
+      Meet Crimpdeq, a portable digital force sensor for climbers, coaches, and therapists to measure and train
+      finger strength, pulling power, and endurance.
+    </p>
+
+    <ul class="summary">
+      <li>Open-source firmware written in Rust.</li>
+      <li>Open-source PCB and 3D printable case design.</li>
+      <li>Bluetooth Low Energy communication.</li>
+      <li>Works with the <a href="https://tindeq.com/" target="_blank" rel="noopener noreferrer">Tindeq Progressor</a>
+        and <a href="https://www.frez.app/en" target="_blank" rel="noopener noreferrer">Frez</a> apps on iOS and
+        Android.
+      </li>
+    </ul>
+
+    <section class="book-section" aria-labelledby="book-heading">
+      <h2 class="book-heading" id="book-heading">Crimpdeq Book</h2>
+      <p class="book-text">
+        The book includes everything you need to build and use your own Crimpdeq. It covers assembly, calibration,
+        firmware, charging, and PCB details.
+      </p>
+    </section>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://crimpdeq.github.io/book/" target="_blank" rel="noopener noreferrer">
+        Open Crimpdeq Book
+      </a>
+    </div>
+
+    <section class="book-section" aria-labelledby="app-heading">
+      <h2 class="book-heading" id="app-heading">Crimpdeq App</h2>
+      <p class="book-text">
+        The Crimpdeq App lets you connect to, test, and calibrate your Crimpdeq. It is not intended for training.
+        For training sessions, use the Tindeq Progressor or Frez apps.
+      </p>
+      <p class="book-text">
+        See the
+        <a href="https://crimpdeq.github.io/book/calibration.html#using-crimpdeq-app" target="_blank"
+          rel="noopener noreferrer">Calibration section in the Book</a>.
+        The app is available on Windows, macOS, Linux, Android, and the web.
+      </p>
+      <div class="actions app-actions">
+        <a class="btn btn-primary" href="https://crimpdeq.github.io/crimpdeq-app/" target="_blank"
+          rel="noopener noreferrer">
+          Open Crimpdeq App
+        </a>
+      </div>
+    </section>
+
+    <div class="links">
+      <div class="sources-inline">
+        <svg class="github-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4a3.1 3.1 0 0 0-1.3-1.7c-1.1-.8.1-.8.1-.8a2.5 2.5 0 0 1 1.8 1.2 2.5 2.5 0 0 0 3.4 1 2.5 2.5 0 0 1 .8-1.6c-2.7-.3-5.4-1.3-5.4-5.9a4.6 4.6 0 0 1 1.2-3.2 4.3 4.3 0 0 1 .1-3.2s1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2a4.3 4.3 0 0 1 .1 3.2 4.6 4.6 0 0 1 1.2 3.2c0 4.6-2.8 5.6-5.5 5.9a2.8 2.8 0 0 1 .8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z" />
+        </svg>
+        <span class="sources-label">Sources</span>
+        <span class="source-sep">|</span>
+        <a href="https://github.com/crimpdeq" target="_blank" rel="noopener noreferrer">GitHub Organization</a>
+        <span class="source-sep">|</span>
+        <a href="https://github.com/crimpdeq/crimpdeq-firmware" target="_blank" rel="noopener noreferrer">Firmware</a>
+        <span class="source-sep">|</span>
+        <a href="https://github.com/crimpdeq/crimpdeq-hardware" target="_blank" rel="noopener noreferrer">Hardware</a>
+        <span class="source-sep">|</span>
+        <a href="https://github.com/crimpdeq/book" target="_blank" rel="noopener noreferrer">Book</a>
+        <span class="source-sep">|</span>
+        <a href="https://github.com/crimpdeq/crimpdeq-app" target="_blank" rel="noopener noreferrer">App</a>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
