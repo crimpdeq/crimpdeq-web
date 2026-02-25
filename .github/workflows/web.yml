@@ -25,3 +25,4 @@ jobs:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: 2fc7f8105c4c2a621b320949cae125ae
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+                  command: pages deploy web --project-name=crimpdeq
