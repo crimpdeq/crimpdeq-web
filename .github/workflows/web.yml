@@ -20,12 +20,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v6
             - name: Publish to Cloudflare Pages
-              uses: cloudflare/pages-action@v1
+              uses: cloudflare/wrangler-action@v3
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: 2fc7f8105c4c2a621b320949cae125ae
-                  projectName: crimpdeq
-                  directory: web
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-                  branch: main
-                  wranglerVersion: "3"
