@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Cloudflare Wrangler local state/cache (contains account metadata)
+.wrangler/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
